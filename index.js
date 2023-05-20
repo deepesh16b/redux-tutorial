@@ -3,8 +3,9 @@ const redux = require("redux");
 const createStore= redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 const combineReducers = redux.combineReducers;
-
-
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+const applyMiddleware = redux.applyMiddleware;
 // ---actions TYPE-----
 const CAKE_ORDERED= "CAKE_ORDERED";
 const CAKE_RESTOCKED="CAKE_RESTOCKED";
@@ -81,8 +82,8 @@ const icecreamReducer = (state = initialIcecreamState, action)=>{
 
 // ---Store created-----
 const rootReducer = combineReducers({cake : cakeReducer, icecream : icecreamReducer,})
-const store = createStore(rootReducer);
-console.log("Initial state:",store.getState());
+const store = createStore(rootReducer, applyMiddleware(logger));
+
 // ---adding Subscribe listener to store-----
 // const unsubscribe = store.subscribe(()=>
 //     console.log("updated state:",store.getState()))
@@ -93,11 +94,10 @@ console.log("Initial state:",store.getState());
 
 // store.dispatch(restockCake(3));
 
-// unsubscribe();v v v v v v v v v v v v v v v v 14700
+// unsubscribe();
 
 // -----------BIND ACTION CREATOR--------------
-const unsubscribe = store.subscribe(()=>
-    console.log("updated state:",store.getState()))
+const unsubscribe = store.subscribe(()=>{});
 
 const actions = bindActionCreators({orderCake, restockCake, orderIcecream, restockIcecream}, store.dispatch);
 actions.orderCake();
