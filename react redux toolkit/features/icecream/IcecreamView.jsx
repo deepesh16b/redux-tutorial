@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 
-export const icecreamsView = () => {
+export const IcecreamsView = () => {
   return <div>
     <h2>Number of Icecreams - </h2>
     <button>Order Icecreams</button>

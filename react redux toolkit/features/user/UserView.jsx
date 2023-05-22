@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 
-export const userView = () => {
+export const UserView = () => {
   return (
     <div>
       <h2>List of users - </h2>
